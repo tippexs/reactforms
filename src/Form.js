@@ -15,16 +15,29 @@ class MyForm extends React.Component {
 
     };
 
+    handleChange = event =>  {
+        this.setState({[event.target.name]: event.target.value});
+    };
+
+    handleFormSubmit = event => {
+        event.preventDefault();
+        console.log(this.state);
+    };
+
+
     constructor(props) {
         super(props);
-        this.state = null;
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.state = undefined;
 
     }
 
     render() {
         return (
-            <form>
-                <MySelect options={this.options} />
+            <form onSubmit={this.handleFormSubmit} >
+                <input name="dummy" type="text" onChange={this.handleChange}/>
+                <MySelect name="select-1" options={this.options} onChange={this.handleChange}/>
+                <MySelect name="select-2" options={this.options} onChange={this.handleChange}/>
                 <input type="submit"/>
             </form>
         );
